@@ -1,6 +1,7 @@
 package org.example;
 
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,12 +14,11 @@ public class WriteToFile {
     }
 
     public void write(String string) {
-        try {
-            FileWriter writer = new FileWriter(file);
+        try (FileWriter writer = new FileWriter(file, true)) {
             writer.write(string + "\n");
             writer.flush();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

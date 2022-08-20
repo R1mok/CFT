@@ -1,7 +1,5 @@
 package org.example;
 
-import java.io.Writer;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -14,5 +12,9 @@ public class Main {
         Parser.parse(args);
         Sorter sorter = new Sorter(isString, isDeskSort, inputFiles, outputFile);
         sorter.sort();
+        System.out.println("""
+                ------------
+                Successfully
+                ------------""");
     }
 }

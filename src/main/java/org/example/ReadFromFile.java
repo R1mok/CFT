@@ -28,12 +28,11 @@ public class ReadFromFile {
     }
 
     public String toNextString() {
-        String previousString = getCurrentString();
         if (scanner.hasNext()) {
             this.currentString = scanner.nextLine();
         } else {
             EOF = true;
         }
-        return previousString;
+        return currentString;
     }
 }
