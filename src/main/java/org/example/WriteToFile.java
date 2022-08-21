@@ -1,7 +1,5 @@
 package org.example;
 
-
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +16,7 @@ public class WriteToFile {
             writer.write(string + "\n");
             writer.flush();
         } catch (IOException e) {
+            System.out.println("Failed to write into a file");
             throw new RuntimeException(e);
         }
     }

@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         Parser.parse(args);
-        Sorter sorter = new Sorter(isString, isDeskSort, inputFiles, outputFile);
+        Sorter sorter = new Sorter();
         sorter.sort();
         System.out.println("""
                 ------------

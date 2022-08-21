@@ -16,6 +16,7 @@ public class ReadFromFile {
                 currentString = scanner.nextLine();
             } else {
                 System.out.println("File is empty");
+                EOF = true;
             }
         } catch (FileNotFoundException e) {
             System.out.println("File " + file.getName() + " not found");
