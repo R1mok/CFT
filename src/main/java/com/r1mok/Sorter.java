@@ -3,20 +3,21 @@ package com.r1mok;
 import java.util.*;
 
 public class Sorter {
-    private Map<ReadFromFile, String> buffer = new HashMap<>();
+    private Map<ReadFromFile, String> buffer = new LinkedHashMap<>();
 
     Map<ReadFromFile, Integer> getIntegerMap(Map<ReadFromFile, String> stringMap) {
-        Map<ReadFromFile, Integer> resultMap = new HashMap<>();
+        Map<ReadFromFile, Integer> resultMap = new LinkedHashMap<>();
         ReadFromFile lastFile = null;
         for (Map.Entry<ReadFromFile, String> entry : stringMap.entrySet()) {
             lastFile = entry.getKey();
             try {
                 resultMap.put(entry.getKey(), Integer.parseInt(entry.getValue()));
             } catch (NumberFormatException e) {
+                String incorrectString = lastFile.getCurrentString();
                 if (!lastFile.EOF) {
-                    System.out.println("Can`t recognize integer from file");
-                    System.out.println("Deleting line \"" + lastFile.getCurrentString() + "\" from file " + lastFile.getFile());
                     stringMap.put(lastFile, lastFile.toNextString());
+                    System.out.println("Can`t recognize integer from file");
+                    System.out.println("Deleting line \"" + incorrectString + "\" from file " + lastFile.getFile());
                     getIntegerMap(stringMap);
                 } else {
                     stringMap.remove(lastFile);
