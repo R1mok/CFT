@@ -9,7 +9,10 @@ public class ReadFromFile {
     private String currentString;
     private Scanner scanner;
 
+    private final File file;
+
     public ReadFromFile(File file) {
+        this.file = file;
         try {
             this.scanner = new Scanner(file);
             if (scanner.hasNext()) {
@@ -22,6 +25,10 @@ public class ReadFromFile {
             System.out.println("File " + file.getName() + " not found");
             EOF = true;
         }
+    }
+
+    public File getFile() {
+        return file;
     }
 
     public String getCurrentString() {

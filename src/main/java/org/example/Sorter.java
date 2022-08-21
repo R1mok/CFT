@@ -7,14 +7,18 @@ public class Sorter {
     private Map<ReadFromFile, String> buffer = new HashMap<>();
 
     Map<ReadFromFile, Integer> getIntegerMap(Map<ReadFromFile, String> stringMap) {
-        Map<ReadFromFile, Integer> resultMap;
+        Map<ReadFromFile, Integer> resultMap = new HashMap<>();
+        ReadFromFile lastFile = null;
         try {
-            resultMap = stringMap.entrySet().stream().collect(Collectors.toMap(
-                    Map.Entry::getKey, entry -> Integer.parseInt(entry.getValue())
-            ));
+            for (Map.Entry<ReadFromFile, String> entry : stringMap.entrySet()) {
+                lastFile = entry.getKey();
+                resultMap.put(entry.getKey(), Integer.parseInt(entry.getValue()));
+            }
         } catch (NumberFormatException e) {
             System.out.println("Can`t recognize integer from file");
-            throw new RuntimeException(e.getMessage());
+            System.out.println("We should remove some information from our resulting file");
+            stringMap.remove(lastFile);
+            resultMap = getIntegerMap(stringMap);
         }
         return resultMap;
     }
@@ -36,6 +40,9 @@ public class Sorter {
                 }
             } else {
                 Map<ReadFromFile, Integer> integerMap = getIntegerMap(buffer);
+                if (integerMap.isEmpty()) {
+                    continue;
+                }
                 if (Main.isDeskSort) {
                     entry = Collections.max(integerMap.entrySet(), Map.Entry.comparingByValue());
                 } else {
