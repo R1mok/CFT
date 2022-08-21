@@ -1,4 +1,4 @@
-package com;
+package com.r1mok;
 
 import java.util.*;
 

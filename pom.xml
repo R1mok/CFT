@@ -27,7 +27,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.Main</mainClass>
+                            <mainClass>com.r1mok.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -37,7 +37,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>com.Main</mainClass>
+                    <mainClass>com.r1mok.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
