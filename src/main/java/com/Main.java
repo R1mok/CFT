@@ -1,4 +1,4 @@
-package org.example;
+package com;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ public class Main {
         System.out.println("""
                 ------------
                 Successfully
-                ------------""");
+                ------------
+                """);
     }
 }

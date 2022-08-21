@@ -1,7 +1,6 @@
-package org.example;
+package com;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Sorter {
     private Map<ReadFromFile, String> buffer = new HashMap<>();
