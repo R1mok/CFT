@@ -9,16 +9,20 @@ public class Sorter {
     Map<ReadFromFile, Integer> getIntegerMap(Map<ReadFromFile, String> stringMap) {
         Map<ReadFromFile, Integer> resultMap = new HashMap<>();
         ReadFromFile lastFile = null;
-        try {
-            for (Map.Entry<ReadFromFile, String> entry : stringMap.entrySet()) {
-                lastFile = entry.getKey();
+        for (Map.Entry<ReadFromFile, String> entry : stringMap.entrySet()) {
+            lastFile = entry.getKey();
+            try {
                 resultMap.put(entry.getKey(), Integer.parseInt(entry.getValue()));
+            } catch (NumberFormatException e) {
+                if (!lastFile.EOF) {
+                    System.out.println("Can`t recognize integer from file");
+                    System.out.println("Deleting line \"" + lastFile.getCurrentString() + "\" from file " + lastFile.getFile());
+                    stringMap.put(lastFile, lastFile.toNextString());
+                    getIntegerMap(stringMap);
+                } else {
+                    stringMap.remove(lastFile);
+                }
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Can`t recognize integer from file");
-            System.out.println("We should remove some information from our resulting file");
-            stringMap.remove(lastFile);
-            resultMap = getIntegerMap(stringMap);
         }
         return resultMap;
     }
