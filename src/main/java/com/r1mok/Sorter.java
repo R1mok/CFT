@@ -5,7 +5,7 @@ import java.util.*;
 public class Sorter {
     private Map<ReadFromFile, String> buffer = new LinkedHashMap<>();
 
-    Map<ReadFromFile, Integer> getIntegerMap(Map<ReadFromFile, String> stringMap) {
+    Map<ReadFromFile, Integer> getIntegerMap(Map<ReadFromFile, String> stringMap, List<ReadFromFile> deletedLinesList) {
         Map<ReadFromFile, Integer> resultMap = new LinkedHashMap<>();
         ReadFromFile lastFile = null;
         for (Map.Entry<ReadFromFile, String> entry : stringMap.entrySet()) {
@@ -18,11 +18,14 @@ public class Sorter {
                     stringMap.put(lastFile, lastFile.toNextString());
                     System.out.println("Can`t recognize integer from file");
                     System.out.println("Deleting line \"" + incorrectString + "\" from file " + lastFile.getFile());
-                    getIntegerMap(stringMap);
+                    getIntegerMap(stringMap, deletedLinesList);
                 } else {
-                    stringMap.remove(lastFile);
+                    deletedLinesList.add(lastFile);
                 }
             }
+        }
+        for (ReadFromFile readFromFile : deletedLinesList) {
+            resultMap.remove(readFromFile);
         }
         return resultMap;
     }
@@ -43,7 +46,11 @@ public class Sorter {
                     entry = Collections.min(buffer.entrySet(), Map.Entry.comparingByValue());
                 }
             } else {
-                Map<ReadFromFile, Integer> integerMap = getIntegerMap(buffer);
+                List<ReadFromFile> deletedLinesList = new ArrayList<>();
+                Map<ReadFromFile, Integer> integerMap = getIntegerMap(buffer, deletedLinesList);
+                for (ReadFromFile deletedLine : deletedLinesList) {
+                    buffer.remove(deletedLine);
+                }
                 if (integerMap.isEmpty()) {
                     continue;
                 }
