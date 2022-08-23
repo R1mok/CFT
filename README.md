@@ -5,9 +5,9 @@
 3. Имя выходного файла, обязательное;
 4. Остальные параметры - имена входных файлов, не менее одного.
 Примеры запуска из командной строки для Windows.
-* `java -jar target/cft-task.jar -i -a out.txt in.txt` (для целых чисел по возрастанию)
-* `java -jar target/cft-task.jar -s out.txt in.txt in1.txt` (для строк по возрастанию)
-* `java -jar target/cft-task.jar -d -s out.txt in.txt in1.txt in2.txt` (для строк по убыванию)
+* `java -jar cft-task.jar -i -a out.txt in.txt` (для целых чисел по возрастанию)
+* `java -jar cft-task.jar -s out.txt in.txt in1.txt` (для строк по возрастанию)
+* `java -jar cft-task.jar -d -s out.txt in.txt in1.txt in2.txt` (для строк по убыванию)
 ---
 ## Инструкция по запуску
 1. Версия Java: `openjdk 18.0.2.1`
